@@ -1,0 +1,14 @@
+<div class="row" >
+
+    <div class="col-md-3 mb-3" *ngFor="let peliculaBuscar of peliculasBuscar">
+
+        <img [src]="peliculaBuscar.poster_path | poster" class="rounded img-thumbnail cursor height" (click)="onClickPelicula(peliculaBuscar)">
+        <div>
+            <h3 class="mt-2">{{peliculaBuscar.title}}</h3>
+            <div class="row align-items-center">
+
+            </div>
+        </div>
+    </div>
+
+</div>

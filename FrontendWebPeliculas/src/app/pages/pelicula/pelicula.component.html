@@ -1,0 +1,31 @@
+<div class="row mt-4" *ngIf="pelicula">
+    <div class="col-5">
+        <img [src]="pelicula.poster_path | poster" class="img-thumbnail">
+    </div>
+    <div class="col-5">
+        <h3>Resumen:</h3>
+
+        <div class="row">
+            <div class="container">
+                <div class="col padding">
+                    <p *ngIf="pelicula.overview">{{pelicula.overview}}</p>
+                    <p *ngIf="!pelicula.overview">No hay resumen de esta pelicula</p>
+                    <p>País de origen: {{pelicula.origin_country}}</p>
+                    <p>Calificación: {{pelicula.vote_average}}</p>
+                    <p>Fecha de estreno: {{pelicula.release_date}}</p>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <button class="btn btn-outline-success" (click)="regresar()">Regresar</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

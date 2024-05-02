@@ -1,0 +1,8 @@
+<h1 class="text-capitalize mt-2">Buscar Pelicula: <small>{{txtBuscar}}</small></h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-buscar-peliculas [peliculasBuscar]="peliculasBuscar" *ngIf="peliculasBuscar.length > 0"></app-buscar-peliculas>
+        <h3 class="text-warning" *ngIf="peliculasVacio">{{peliculasVacio}}</h3>
+    </div>
+</div>
