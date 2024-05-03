@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.cursor{
+    cursor: pointer;   
+}
+.btnIniciar, .btnPerfil{
+    margin-left: 8px;
+    white-space: nowrap;
+}

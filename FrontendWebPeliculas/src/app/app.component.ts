@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from './services/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'FrontendWebPeliculas';
   isLoggedIn: boolean = false
+  
+  constructor (public usuarioServ:UsuarioService){}
+
 }

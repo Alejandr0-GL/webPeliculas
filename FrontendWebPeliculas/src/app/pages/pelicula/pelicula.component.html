@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="container">
-                <div class="col padding">
+                <div class="col ta-justify">
                     <p *ngIf="pelicula.overview">{{pelicula.overview}}</p>
                     <p *ngIf="!pelicula.overview">No hay resumen de esta pelicula</p>
                     <p>País de origen: {{pelicula.origin_country}}</p>
@@ -21,9 +21,20 @@
 
         <div class="row mt-4">
             <div class="col">
-                <button class="btn btn-outline-success" (click)="regresar()">Regresar</button>
+                
             </div>
-
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <button class="btn btn-outline-success btnAgregar" (click)="agregarAlPerfil()">Agregar</button>
+                <button class="btn btn-outline-success btnEliminar" (click)="eliminarPeliculaGuardada()">Eliminar del perfil</button>
+                <button class="btn btn-outline-success btnRegresar" (click)="regresar()">Regresar</button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <p>{{Mensaje}}</p>
+            </div>
         </div>
     </div>
 

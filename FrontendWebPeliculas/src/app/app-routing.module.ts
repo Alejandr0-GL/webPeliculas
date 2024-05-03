@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'administrarUsuarios', component:AdministrarUsuariosComponent},
   {path:'perfil', component:PerfilComponent},
   {path:'home', component:HomeComponent},
-  {path:'pelicula/:movieID', component:PeliculaComponent},
+  {path:'pelicula/:idPelicula', component:PeliculaComponent},
   {path:'buscar/:txtBuscar', component:BuscarComponent},
   {path:'', pathMatch: 'full', redirectTo: '/home'},
   {path:'**', redirectTo: '/home'}

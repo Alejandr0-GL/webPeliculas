@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registrarse',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './registrarse.component.html',
   styleUrl: './registrarse.component.css'
 })
@@ -15,6 +17,7 @@ export class RegistrarseComponent {
   email: string = '';
   password: string = '';
   rol: string = '';
+  Mensaje= '';
 
 
   constructor(private router:Router, private usuarioServ:UsuarioService){}
@@ -24,19 +27,20 @@ export class RegistrarseComponent {
   }
 
   registrarUsuario(){
-    const datosUsuario = {
+    const usuario = {
       nombreUsuario: this.nombreUsuario,
       email: this.email,
       password: this.password,
-      rol: this.rol
+      rol: "usuario"
     };
 
-    this.usuarioServ.registrarUsuario(datosUsuario).subscribe({
+    this.usuarioServ.registrarUsuario(usuario).subscribe({
       next: (response) => {
-        console.log('Usuario registrado exitosamente', response);
+        this.Mensaje= 'Usuario registrado exitosamente';
+        this.navIniciarSesionPage();
       },
       error: (error) => {
-        console.error('Error registrando el usuario', error);
+        this.Mensaje= 'Error registrando el usuario, compruebe los datos de inicio e intente de nuevo';
       }
     });
 

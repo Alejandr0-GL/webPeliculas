@@ -1,4 +1,13 @@
-<p>perfil works!</p>
+<h1 class="text-capitalize mt-2">Peliculas guardadas: </h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-buscar-peliculas [peliculasBuscar]="peliculasBuscar"></app-buscar-peliculas>
+        <h3 class="text-warning" *ngIf="peliculasVacio">{{peliculasVacio}}</h3>
+    </div>
+</div>
+
+
 <div class="row mt-4">
     <div class="col">
         <button class="btn btn-outline-success" (click)="regresar()">Regresar</button>

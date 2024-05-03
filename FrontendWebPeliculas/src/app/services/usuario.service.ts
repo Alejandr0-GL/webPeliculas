@@ -10,6 +10,7 @@ export class UsuarioService {
 
   isLoggedIn = false
   private apiURL = 'https://localhost:7290/api/User/';
+  esAdminVariable?:boolean;
   
 
   constructor(private http:HttpClient) { }
@@ -40,8 +41,6 @@ export class UsuarioService {
     return this.http.get<any>(`${this.apiURL}Rol?idUsuario=${idUsuario}`)
   }
 
-  esAdminVariable?:boolean;
-
   esAdmin(): void {
     const idUsuario = this.getIdUsuarioToken();
   
@@ -67,8 +66,9 @@ export class UsuarioService {
     );
   }
 
-  registrarUsuario(datosUsuario: {nombreUsuario:string, email:string, password:string, rol:string}):Observable<any>{
-    return this.http.post(`${this.apiURL}IngresarUsuario`, datosUsuario);
+  registrarUsuario(usuario: {nombreUsuario:string, email:string, password:string, rol:string}):Observable<any>{ //REVISAR SI ES NECESARIO EL OBSERVABLE
+    console.log('estoy en registrar usuario, usuario service', usuario)
+    return this.http.post(`${this.apiURL}IngresarUsuario`, usuario);
   }
 
 
@@ -79,5 +79,7 @@ export class UsuarioService {
   onAutenticacionExitosa() {
     this.isLoggedIn = true; 
   }
+
+
 
 }

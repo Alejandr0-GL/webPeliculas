@@ -13,7 +13,6 @@ import { UsuarioService } from '../../services/usuario.service';
 })
 export class NavbarComponent implements OnInit{
 
-  isLoggedIn = false
 
   constructor(private router:Router, public usuarioServ:UsuarioService){}
 
@@ -43,5 +42,17 @@ export class NavbarComponent implements OnInit{
   navAdminUsuariosPage(){
     this.router.navigate(['/administrarUsuarios']);
   }
+
+  regresar(){
+    window.history.back();
+  }
+
+  cerrarSesion(){
+    sessionStorage.removeItem('tokenGenerado')
+    console.log('Logout exitoso')
+    this.usuarioServ.isLoggedIn = false
+    this.router.navigate(['/iniciarSesion']);
+  }
+
 
 }

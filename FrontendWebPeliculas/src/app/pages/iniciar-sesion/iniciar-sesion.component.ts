@@ -17,7 +17,7 @@ export class IniciarSesionComponent{
   isLoggedIn = false
   nombreUsuarioOEmail=''
   password=''
-  errorMensaje=''
+  Mensaje=''
 
   constructor(private usuarioServ:UsuarioService, private router:Router){}
   
@@ -37,7 +37,7 @@ export class IniciarSesionComponent{
     
     },
     (error)=>{
-      this.errorMensaje='Error al iniciar sesion, intente nuevamente'
+      this.Mensaje='Credenciales incorrectas'
       console.error('Login error',error)
     })
   }

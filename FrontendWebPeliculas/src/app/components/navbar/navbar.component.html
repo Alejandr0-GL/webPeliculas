@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Web Peliculas</a>
+      <a class="navbar-brand cursor" (click)="regresar()">Web Peliculas</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,6 +16,7 @@
           <button class="btn btn-outline-success" type="submit" (click)="buscarPelicula(txtBuscar.value)">Buscar</button>
           <button *ngIf="!usuarioServ.isLoggedIn" class="btn btn-outline-success btnIniciar" type="button" (click)="navIniciarSesionPage()">Iniciar Sesión</button>
           <button *ngIf="usuarioServ.isLoggedIn" class="btn btn-outline-success btnPerfil" type="button" (click)="navPerfilPage()">Perfil</button>
+          <button *ngIf="usuarioServ.isLoggedIn" class="btn btn-outline-success btnPerfil" type="button" (click)="cerrarSesion()">Cerrar Sesión</button>
 
         </div>
         

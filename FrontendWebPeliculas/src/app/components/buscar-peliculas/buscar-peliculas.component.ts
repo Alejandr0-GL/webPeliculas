@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PeliculasBuscar } from '../../interfaces/peliculasBuscar.interface';
 import { PipesModule } from '../../pipes/pipes.module';
+import { DetallesPelicula } from '../../interfaces/detalles.interface';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 export class BuscarPeliculasComponent {
 
   @Input() peliculasBuscar?: PeliculasBuscar[];
+  @Input() detallesBuscar?: DetallesPelicula[];
 
   constructor(private router:Router){}
 

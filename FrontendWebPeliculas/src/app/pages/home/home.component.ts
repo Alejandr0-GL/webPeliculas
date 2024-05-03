@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private peliculasServ: PeliculasService){}
 
-  ngOnInit(): void {
+  ngOnInit(){
       this.cargarPeliculas()
   }
 

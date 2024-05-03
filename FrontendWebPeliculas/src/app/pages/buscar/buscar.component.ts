@@ -30,6 +30,8 @@ export class BuscarComponent implements OnInit{
       this.peliculasServ.getPeliculasBuscar(this.txtBuscar).subscribe(peliculasBuscar=>{
         this.peliculasBuscar=peliculasBuscar
 
+        console.log(peliculasBuscar)
+
         if(this.peliculasBuscar.length===0){
           this.peliculasVacio='No se encontró ninguna pelicula'
         }

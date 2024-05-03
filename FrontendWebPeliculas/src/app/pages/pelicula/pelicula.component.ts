@@ -4,6 +4,8 @@ import { PeliculasService } from '../../services/peliculas.service';
 import { CommonModule } from '@angular/common';
 import { DetallesPelicula } from '../../interfaces/detalles.interface';
 import { PipesModule } from '../../pipes/pipes.module';
+import { UsuarioService } from '../../services/usuario.service';
+import { PeliculasGuardadasService } from '../../services/peliculas-guardadas.service';
 
 @Component({
   selector: 'app-pelicula',
@@ -15,13 +17,16 @@ import { PipesModule } from '../../pipes/pipes.module';
 export class PeliculaComponent implements OnInit {
   
   pelicula?:DetallesPelicula
+  idUsuario:string = ''
+  idPelicula:string = ''
+  Mensaje:string = ''
 
-  constructor(private activatedRoute:ActivatedRoute, private peliculasServ:PeliculasService){}
+
+  constructor(private activatedRoute:ActivatedRoute, private peliculasServ:PeliculasService, private usuarioServ:UsuarioService, private PeliculasGuardadasServ:PeliculasGuardadasService){}
   
   ngOnInit(){
-    const {movieID} = this.activatedRoute.snapshot.params
-
-    this.peliculasServ.getDetallesPelicula(movieID).subscribe(pelicula=>{
+    const {idPelicula} = this.activatedRoute.snapshot.params
+    this.peliculasServ.getDetallesPelicula(idPelicula).subscribe(pelicula=>{
 
       console.log(pelicula)
 
@@ -35,9 +40,49 @@ export class PeliculaComponent implements OnInit {
     })
   }
 
+  agregarAlPerfil(){
+    const {idPelicula} = this.activatedRoute.snapshot.params
+    
+    const pelicula = {
+      idUsuario: this.usuarioServ.getIdUsuarioToken(),
+      idPelicula
+    };
+    console.log('a guardar: ',pelicula)
+
+    this.PeliculasGuardadasServ.agregarPelicula(pelicula).subscribe({
+      next: (Response) => {
+        this.Mensaje= 'Pelicula agregada correctamente';
+        console.log(this.Mensaje)
+        //this.navIniciarSesionPage();
+      },
+      error: (error) => {
+        this.Mensaje = 'Esta pelicula ya se encuentra agregada'
+        console.log(this.Mensaje), error
+      }
+    })
+
+  }
+
+  eliminarPeliculaGuardada(){
+    this.idUsuario = this.usuarioServ.getIdUsuarioToken()
+    const {idPelicula} = this.activatedRoute.snapshot.params
+
+    console.log('idUsuario: ',this.idUsuario, 'idPelicula',idPelicula)
+
+    this.PeliculasGuardadasServ.eliminarPeliculaGuardada(this.idUsuario, idPelicula).subscribe({
+      next: (Response) => {
+        this.Mensaje= 'Pelicula eliminada correctamente';
+        console.log(this.Mensaje)
+        //this.navIniciarSesionPage();
+      },
+      error: (error) => {
+        this.Mensaje = 'Error al eliminar la pelicula'
+        console.error('error al eliminar: ', error)
+      }
+    })
+  }
+
   regresar(){
     window.history.back();
   }
-
-  
 }

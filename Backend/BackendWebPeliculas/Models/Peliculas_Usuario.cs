@@ -4,7 +4,5 @@
     {
         public int idUsuario { get; set; }
         public int idPelicula { get; set; }
-
-        public string detallesPelicula { get; set; }
     }
 }
