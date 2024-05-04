@@ -19,7 +19,7 @@ Uso:
     - Añadir un nuevo usuario, solo un usuario administrador puede elegir el rol de los usuarios que quiere agregar.
     - Actualizar información de un usuario en especifico.
     - Eliminar un usuario.
-    - 
+     
 Estado del proyecto
 
 Frontend (Angular):
