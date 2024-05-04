@@ -14,17 +14,12 @@ Uso:
     
   - La app permite a cada usuario guardar peliculas, las peliculas guardadas se pueden ver en el apartado "Perfil" arriba a la derecha despues de estar autenticado, también permite borrarlas.
     
-  - En un futuro se implementara la opcion de "Gestionar usuarios", con el boton que solo aparece si se inicia como administrador.
-
-
-Observaciones:
-
-  - Frontend:
-    - Falta implementar el CRUD para administrar usuarios
-
-  - Backend:
-    - CRUD en el backend ya terminado, falta implementarlo desde el frontend.
-
+- La app permite gestionar usuarios si se ingresa con un perfil "Administrador", con el boton de arriba a la izquierda se accede a la pagina de "Administrar usuarios", en esta pagina se puede:
+    - Ver los usuarios que hay registrados.
+    - Añadir un nuevo usuario, solo un usuario administrador puede elegir el rol de los usuarios que quiere agregar.
+    - Actualizar información de un usuario en especifico.
+    - Eliminar un usuario.
+    - 
 Estado del proyecto
 
 Frontend (Angular):
@@ -34,9 +29,9 @@ Frontend (Angular):
   - Mostrar detalles de una película seleccionada cuando se hace clic en ella. (Terminado)
   - Permitir a los usuarios guardar películas en su perfil cuando estén autenticados. (Terminado)
   - Crear una página en el perfil del usuario donde se muestren las películas guardadas por el usuario. (Terminado)
-  - Crear una pagina en el perfil de administrador en donde pueda administrar los usuarios, incluyendo visualización, creación, edición y eliminación de usuarios. (En proceso)
+  - Crear una pagina en el perfil de administrador en donde pueda administrar los usuarios, incluyendo visualización, creación, edición y eliminación de usuarios. (Terminado)
   - Utilizar enrutamiento para navegar entre las páginas. (Terminado)
-  - Implementar un servicio Angular para conectarse al backend de .NET Core. (En proceso)
+  - Implementar un servicio Angular para conectarse al backend de .NET Core. (Terminado)
 
 Backend (.NET CORE):
   - Crear un API RESTful que proporcione endpoints para:
