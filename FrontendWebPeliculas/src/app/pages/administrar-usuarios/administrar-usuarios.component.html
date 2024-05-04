@@ -1,4 +1,77 @@
-<p>administrar-usuarios works!</p>
+<mat-card class="mt-4">
+    <mat-card-header>
+        <mat-card-title>Lista de usuarios</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <button mat-flat-button color="primary" class="mb-4 mt-3" (click)="crearUsuario()">Añadir</button>
+
+
+        <table mat-table [dataSource]="listaUsuario" class="mat-elevation-z2">
+
+            <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+            <!-- IdUsuario Column -->
+            <ng-container matColumnDef="idUsuario">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.idUsuario}} </td>
+            </ng-container>
+        
+            <!-- nombreUsuario Column -->
+            <ng-container matColumnDef="nombreUsuario">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </td>
+            </ng-container>
+        
+            <!-- email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+        
+            <!-- password Column -->
+            <ng-container matColumnDef="password">
+              <th mat-header-cell *matHeaderCellDef> Password </th>
+              <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+            </ng-container>
+
+            <!-- rol Column -->
+            <ng-container matColumnDef="rol">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let element"> {{element.rol}} </td>
+            </ng-container>
+
+            <!-- accion Column -->
+            <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+
+                    <button mat-icon-button color="primary" (click)="editarUsuario(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="warn" (click)="eliminarUsuario(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+                </td>
+            </ng-container>
+        
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        
+        
+    </mat-card-content>
+  </mat-card>
+
+
+
+
+
+
+
 <div class="row mt-4">
     <div class="col">
         <button class="btn btn-outline-success" (click)="regresar()">Regresar</button>

@@ -1,0 +1,36 @@
+<div class="mat-elevation-z2 form-container">
+    <form [formGroup]="formUsuario" class="form-container">
+        <h1 id="title">Ingresar o actualizar</h1>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nombre del usuario</mat-label>
+                <input matInput formControlName="nombreUsuario">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Rol</mat-label>
+                <mat-select formControlName="rol">
+                    <mat-option value="administrador">Administrador</mat-option>
+                    <mat-option value="usuario">Usuario</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="divBotones">
+            <button mat-flat-button color="primary" (click)="guardarCambios()">Guardar</button>
+            <button mat-flat-button color="primary" class="btnRegresar" (click)="regresar()">Regresar</button>
+        </div>
+    </form>
+</div>

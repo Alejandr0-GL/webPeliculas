@@ -17,7 +17,7 @@ export class RegistrarseComponent {
   email: string = '';
   password: string = '';
   rol: string = '';
-  Mensaje= '';
+  Mensaje: string= '';
 
 
   constructor(private router:Router, private usuarioServ:UsuarioService){}
@@ -31,7 +31,7 @@ export class RegistrarseComponent {
       nombreUsuario: this.nombreUsuario,
       email: this.email,
       password: this.password,
-      rol: "usuario"
+      rol: "usuario" //Se le pone esto por defecto, un usuario común no puede elegir su rol
     };
 
     this.usuarioServ.registrarUsuario(usuario).subscribe({
@@ -43,8 +43,6 @@ export class RegistrarseComponent {
         this.Mensaje= 'Error registrando el usuario, compruebe los datos de inicio e intente de nuevo';
       }
     });
-
   }
-
 }
 

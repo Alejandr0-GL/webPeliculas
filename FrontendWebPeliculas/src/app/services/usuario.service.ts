@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { UsuarioALista } from '../interfaces/usuarioALista.interface';
+import { Usuario } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,6 @@ export class UsuarioService {
 
   constructor(private http:HttpClient) { }
 
-  getUsuarios():Observable<UsuarioALista[]>{
-
-    return this.http.get<UsuarioALista>(`${this.apiURL}UsuariosALista`).pipe(
-      map((Response:any)=> Response.results)
-    );
-  }
-
   getIdUsuarioToken(){
   
     const tokenGenerado = sessionStorage.getItem('tokenGenerado');
@@ -31,7 +24,7 @@ export class UsuarioService {
       return null;
     }
 
-    const tokenDecodificado = JSON.parse(atob(tokenGenerado.split('.')[1])); // Decodificar el payload del token JWT
+    const tokenDecodificado = JSON.parse(atob(tokenGenerado.split('.')[1])); // Token decodificado
     const idUsuario = tokenDecodificado.idUsuarioToken;
 
     return idUsuario;
@@ -42,6 +35,7 @@ export class UsuarioService {
   }
 
   esAdmin(): void {
+    //Obtiene el id desde el token en sessionStorage
     const idUsuario = this.getIdUsuarioToken();
   
     if (!idUsuario) {
@@ -50,6 +44,7 @@ export class UsuarioService {
       return;
     }
   
+    //Obtiene el rol del usuario
     this.getRol(idUsuario).subscribe(
       respuesta => {
   
@@ -66,12 +61,6 @@ export class UsuarioService {
     );
   }
 
-  registrarUsuario(usuario: {nombreUsuario:string, email:string, password:string, rol:string}):Observable<any>{ //REVISAR SI ES NECESARIO EL OBSERVABLE
-    console.log('estoy en registrar usuario, usuario service', usuario)
-    return this.http.post(`${this.apiURL}IngresarUsuario`, usuario);
-  }
-
-
   getAutenticacion(nombreUsuarioOEmail:string, password:string):Observable<any>{
     return this.http.get<any>(`${this.apiURL}Autenticacion?nombreUsuarioOEmail=${nombreUsuarioOEmail}&password=${password}`)
   }
@@ -80,6 +69,28 @@ export class UsuarioService {
     this.isLoggedIn = true; 
   }
 
+  //CRUD ------------------------------------------
 
+  getUsuarios():Observable<Usuario[]>{
+    return this.http.get<Usuario[]>(`${this.apiURL}UsuariosALista`).pipe(
+      map((Response)=> Response)
+    );
+  }
+
+  getUsuarioPorID(idUsuario:number){
+    return this.http.get<Usuario>(`${this.apiURL}${idUsuario}`)
+  }
+
+  registrarUsuario(usuario: {nombreUsuario:string, email:string, password:string, rol:string}):Observable<any>{
+    return this.http.post(`${this.apiURL}IngresarUsuario`, usuario);
+  }
+
+  actualizarUsuario(usuario: {idUsuario:number, nombreUsuario:string, email:string, password:string, rol:string}){
+    return this.http.put(`${this.apiURL}ActualizarUsuario`, usuario)
+  }
+  
+  eliminarUsuario(idUsuario:string){
+    return this.http.delete(`${this.apiURL}EliminarUsuario?idUsuario=${idUsuario}`)
+  }
 
 }

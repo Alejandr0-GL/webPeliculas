@@ -24,3 +24,7 @@ CREATE TABLE Peliculas_Usuario (
 INSERT INTO Usuarios(nombreUsuario, email, password, rol) VALUES 
   ('admin', 'admin@admin.com', '1234', 'administrador'),
   ('user', 'user@user.com', '123', 'usuario')
+
+INSERT INTO Peliculas_Usuario(idUsuario, idPelicula) VALUES
+  (2, 823464),
+  (2, 1011985)

@@ -21,16 +21,14 @@ export class NavbarComponent implements OnInit{
   }
 
   buscarPelicula(textoABuscar:string){
-
     textoABuscar = textoABuscar.trim()
     if (textoABuscar.length === 0){
       return;
     }
-
     this.router.navigate(['/buscar', textoABuscar])
-
   }
 
+  // Métodos para cuando se da click en el boton ir a cierta pagina
   navIniciarSesionPage(){
     this.router.navigate(['/iniciarSesion']);
   }
@@ -43,13 +41,16 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['/administrarUsuarios']);
   }
 
+  navHome(){
+    this.router.navigate(['home']);
+  }
+
   regresar(){
     window.history.back();
   }
 
   cerrarSesion(){
     sessionStorage.removeItem('tokenGenerado')
-    console.log('Logout exitoso')
     this.usuarioServ.isLoggedIn = false
     this.router.navigate(['/iniciarSesion']);
   }

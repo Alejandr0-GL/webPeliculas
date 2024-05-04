@@ -20,7 +20,6 @@ export class PeliculasGuardadasService {
   }
 
   eliminarPeliculaGuardada(idUsuario:string, idPelicula:string){
-    console.log('Estoy en peliculas guardadas service, eliminar pelicula guardada', idUsuario, idPelicula)
     return this.http.delete(`${this.apiURL}EliminarGuardadas?idUsuario=${idUsuario}&idPelicula=${idPelicula}`)
   }
 }

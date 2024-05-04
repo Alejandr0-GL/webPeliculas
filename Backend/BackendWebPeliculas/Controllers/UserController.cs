@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BackendWebPeliculas.Classes;
 using BackendWebPeliculas.Models;
 using System.Data.SqlClient;
 using System.Security.Claims;
@@ -30,7 +29,7 @@ namespace BackendWebPeliculas.Controllers
             clsDBConnection _DBConnection = new clsDBConnection();
             List<Usuario> user = new List<Usuario>();
             string query = "SELECT * FROM Usuarios";
-            
+
 
             using (SqlConnection connection = new SqlConnection(_DBConnection.connectionString))
             {
@@ -52,7 +51,45 @@ namespace BackendWebPeliculas.Controllers
                     }
                     reader.Close();
                     connection.Close();
-                    
+
+                    return user;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error: " + ex.Message);
+                }
+
+            }
+        }
+
+        [HttpGet("{idUsuario}")]
+        public Usuario getUsuarioPorID(int idUsuario)
+        {
+            clsDBConnection _DBConnection = new clsDBConnection();
+            Usuario user = new Usuario();
+            string query = "SELECT * FROM Usuarios WHERE idUsuario=@idUsuario";
+
+
+            using (SqlConnection connection = new SqlConnection(_DBConnection.connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        user.idUsuario = Convert.ToInt32(reader[0]);
+                        user.nombreUsuario = reader.GetString(1);
+                        user.email = reader.GetString(2);
+                        user.password = reader.GetString(3);
+                        user.rol = reader.GetString(4);
+                    }
+                    reader.Close();
+                    connection.Close();
+
                     return user;
                 }
                 catch (Exception ex)
@@ -101,7 +138,7 @@ namespace BackendWebPeliculas.Controllers
 
         //Metodo PUT para actualizar un usuario,
         [HttpPut("ActualizarUsuario")]
-        public string ActualizarUsuario(int idUsuario, string nombreUsuario, string email, string password, string rol)
+        public IActionResult ActualizarUsuario([FromBody] Usuario usuario)
         {
             string query = "UPDATE Usuarios SET nombreUsuario=@nombreUsuario, email=@email, password=@password, rol=@rol WHERE idUsuario=@idUsuario";
             clsDBConnection _DBConnection = new clsDBConnection();
@@ -109,11 +146,11 @@ namespace BackendWebPeliculas.Controllers
             using (SqlConnection connection = new SqlConnection(_DBConnection.connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@idUsuario", idUsuario);
-                command.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
-                command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@rol", rol);
+                command.Parameters.AddWithValue("@idUsuario", usuario.idUsuario);
+                command.Parameters.AddWithValue("@nombreUsuario", usuario.nombreUsuario);
+                command.Parameters.AddWithValue("@email", usuario.email);
+                command.Parameters.AddWithValue("@password", usuario.password);
+                command.Parameters.AddWithValue("@rol", usuario.rol);
 
                 try
                 {
@@ -122,11 +159,11 @@ namespace BackendWebPeliculas.Controllers
 
                     connection.Close();
 
-                    return "Se actualizó el usuario correctamente";
+                    return Ok(new { message = "Se actualizó el usuario correctamente" });
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error: " + ex.Message);
+                    return StatusCode(500, new { message = "Error en el servidor: " + ex.Message });
                 }
 
             }
@@ -136,7 +173,7 @@ namespace BackendWebPeliculas.Controllers
 
         //Metodo DELETE para eliminar un usuario por su ID
         [HttpDelete("EliminarUsuario")]
-        public string EliminarUsuario(int idUsuario)
+        public IActionResult EliminarUsuario(int idUsuario)
         {
             string query = "DELETE FROM Usuarios WHERE idUsuario=@idUsuario";
             clsDBConnection _DBConnection = new clsDBConnection();
@@ -153,11 +190,11 @@ namespace BackendWebPeliculas.Controllers
 
                     connection.Close();
 
-                    return "Se eliminó el usuario correctamente";
+                    return Ok(new { message = "Se eliminó el usuario correctamente" });
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Error: " + ex.Message);
+                    return StatusCode(500, new { message = "Error en el servidor: " + ex.Message });
                 }
 
             }

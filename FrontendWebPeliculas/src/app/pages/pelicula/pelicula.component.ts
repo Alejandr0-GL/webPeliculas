@@ -18,17 +18,13 @@ export class PeliculaComponent implements OnInit {
   
   pelicula?:DetallesPelicula
   idUsuario:string = ''
-  idPelicula:string = ''
   Mensaje:string = ''
-
 
   constructor(private activatedRoute:ActivatedRoute, private peliculasServ:PeliculasService, private usuarioServ:UsuarioService, private PeliculasGuardadasServ:PeliculasGuardadasService){}
   
   ngOnInit(){
     const {idPelicula} = this.activatedRoute.snapshot.params
     this.peliculasServ.getDetallesPelicula(idPelicula).subscribe(pelicula=>{
-
-      console.log(pelicula)
 
       if(pelicula === null){
         console.error('Detalles de pelicula no encontrados')
@@ -47,13 +43,10 @@ export class PeliculaComponent implements OnInit {
       idUsuario: this.usuarioServ.getIdUsuarioToken(),
       idPelicula
     };
-    console.log('a guardar: ',pelicula)
 
     this.PeliculasGuardadasServ.agregarPelicula(pelicula).subscribe({
       next: (Response) => {
         this.Mensaje= 'Pelicula agregada correctamente';
-        console.log(this.Mensaje)
-        //this.navIniciarSesionPage();
       },
       error: (error) => {
         this.Mensaje = 'Esta pelicula ya se encuentra agregada'
@@ -67,13 +60,9 @@ export class PeliculaComponent implements OnInit {
     this.idUsuario = this.usuarioServ.getIdUsuarioToken()
     const {idPelicula} = this.activatedRoute.snapshot.params
 
-    console.log('idUsuario: ',this.idUsuario, 'idPelicula',idPelicula)
-
     this.PeliculasGuardadasServ.eliminarPeliculaGuardada(this.idUsuario, idPelicula).subscribe({
       next: (Response) => {
         this.Mensaje= 'Pelicula eliminada correctamente';
-        console.log(this.Mensaje)
-        //this.navIniciarSesionPage();
       },
       error: (error) => {
         this.Mensaje = 'Error al eliminar la pelicula'

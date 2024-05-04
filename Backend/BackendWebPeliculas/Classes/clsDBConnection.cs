@@ -11,7 +11,6 @@ public class clsDBConnection
 {
 
     public string connectionString = "Server=localhost;Database=DBWebPeliculas;Integrated Security=True;";
-    string? Prueba;
     public bool ConnectDB()
     {
         try

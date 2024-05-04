@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { PeliculasPopulares } from '../../interfaces/peliculasPopulares.interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { PeliculasBuscar } from '../../interfaces/peliculasBuscar.interface';
 import { PipesModule } from '../../pipes/pipes.module';
 
 @Component({

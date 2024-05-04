@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PeliculasBuscar } from '../../interfaces/peliculasBuscar.interface';
 import { PipesModule } from '../../pipes/pipes.module';
-import { DetallesPelicula } from '../../interfaces/detalles.interface';
 
 
 @Component({
@@ -16,10 +15,10 @@ import { DetallesPelicula } from '../../interfaces/detalles.interface';
 export class BuscarPeliculasComponent {
 
   @Input() peliculasBuscar?: PeliculasBuscar[];
-  @Input() detallesBuscar?: DetallesPelicula[];
 
   constructor(private router:Router){}
 
+  // Va a /pelicula para mostrar los detalles
   onClickPelicula(PeliculasBuscar:PeliculasBuscar){
     this.router.navigate(['/pelicula', PeliculasBuscar.id])
   }

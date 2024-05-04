@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PosterPipe implements PipeTransform {
 
-
+  //Código para traer la imagen de una pelicula, se le envía el poster_path
 
   transform(poster:string): string {
     
@@ -15,8 +15,5 @@ export class PosterPipe implements PipeTransform {
     else{
       return './assets/noImage.png';
     }
-
-
   }
-
 }

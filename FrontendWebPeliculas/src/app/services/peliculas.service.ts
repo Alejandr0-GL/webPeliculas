@@ -15,27 +15,20 @@ export class PeliculasService {
   constructor(private http:HttpClient) { }
 
   getPeliculasPopulares():Observable<PeliculasPopulares[]>{
-
     return this.http.get<PeliculasPopulares>(`${this.apiURL}Popular`).pipe(
       map((Response:any)=> Response.results)
     );
   }
   
   getPeliculasBuscar(txtBuscar:string):Observable<PeliculasBuscar[]>{
-
     return this.http.get<PeliculasBuscar>(`${this.apiURL}SearchByTitle?title=${txtBuscar}`).pipe(
       map(respuesta=>respuesta.results)
     );
   }
 
   getDetallesPelicula(movieID:string){
-
-  
     return this.http.get<DetallesPelicula>(`${this.apiURL}DetailsByID?movieID=${movieID}`).pipe(
-
       catchError(error=> of(null))
-
-
     );
 
   }

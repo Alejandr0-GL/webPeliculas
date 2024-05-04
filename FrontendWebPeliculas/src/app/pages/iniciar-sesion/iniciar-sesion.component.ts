@@ -3,7 +3,6 @@ import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { FormsModule } from '@angular/forms';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -22,13 +21,13 @@ export class IniciarSesionComponent{
   constructor(private usuarioServ:UsuarioService, private router:Router){}
   
   onSubmit(){
+    //Autentica y genera el token si las credenciales son correctas
     this.usuarioServ.getAutenticacion(this.nombreUsuarioOEmail,this.password).subscribe(respuesta=>{
-    console.log('LogIn exitoso')
 
       const tokenGenerado = respuesta.tokenGenerado
-      sessionStorage.setItem('tokenGenerado', tokenGenerado);
+      sessionStorage.setItem('tokenGenerado', tokenGenerado); //Almacena token en sessionStorage para usarlo en otras funcionalidades
 
-    this.usuarioServ.onAutenticacionExitosa();
+    this.usuarioServ.onAutenticacionExitosa(); //Cambia la variable isLoggedIn a true
     this.isLoggedIn = true
     this.usuarioServ.esAdmin()
     
@@ -40,11 +39,6 @@ export class IniciarSesionComponent{
       this.Mensaje='Credenciales incorrectas'
       console.error('Login error',error)
     })
-  }
-  
-  onClickIniciarSesion(){
-      this.onSubmit();
-    
   }
 
   navRegistrarsePage(){
